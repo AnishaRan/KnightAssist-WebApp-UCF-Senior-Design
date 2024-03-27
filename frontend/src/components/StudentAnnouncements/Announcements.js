@@ -136,6 +136,7 @@ const Announcements = (props) => {
 
   useEffect(() => {
 	const getAnnouncements = async() => await changePage(null, 1);
+	const setNotoPic = async() => setSelectedPic(await getOrgPic(JSON.parse(sessionStorage.getItem("notoUpdate")).organizationID));
 
 	if(props.announcements){	
 		setNumPages(Math.ceil(props.announcements.length / perPage));
@@ -143,6 +144,7 @@ const Announcements = (props) => {
 	}
 	if("notoUpdate" in sessionStorage){
 		setSelectedAnnouncement(JSON.parse(sessionStorage.getItem("notoUpdate")));
+		setNotoPic();
 		setIsModalOpen(true);
 		sessionStorage.removeItem("notoUpdate");
 	}
