@@ -17,6 +17,7 @@ function FavoriteOrganizations(props)
     const [numPages, setNumPages] = useState(0);  
     const [page, setPage] = useState(1);
 	const [orgsPerPage, setOrgsPerPage] = useState(getInitialPerPage());
+	const [windowSize, setWindowSize] = useState(undefined);
 	
 	// Bug purposes
 	const [initiateListener, setInitiateListener] = useState(1);
@@ -152,16 +153,17 @@ function FavoriteOrganizations(props)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-	useEffect(()=>{
-		const adjustForSize = () => {
+	useEffect(() => {
+		if(windowSize){
 			if(!orgCards) return;
-			const width = window.innerWidth;
+			
+			const width = windowSize;
 			
 			const oldOrgsPerPage = orgsPerPage;
 
 			if(width > 1500){
 				setOrgsPerPage(3);
-				setNumPages(Math.ceil(orgs.length / 3))
+				setNumPages(Math.ceil(orgs.length / 3));
 				changePage(null, Math.ceil((((page - 1) * oldOrgsPerPage) + 1) / 3), 3);
 			}else if(width > 900){
 				setOrgsPerPage(2);
@@ -173,10 +175,13 @@ function FavoriteOrganizations(props)
 				changePage(null, Math.ceil((((page - 1) * oldOrgsPerPage) + 1) / 1), 1);
 			}
 		}
+	}, [windowSize])
+
+	useEffect(()=>{
+		const adjustForSize = () => {setWindowSize(window.innerWidth);}
 
 		window.addEventListener("resize", adjustForSize);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[initiateListener])
+	},[initiateListener]);
 
     return(
      <div className='centerCards'>

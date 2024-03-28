@@ -19,8 +19,8 @@ function PastEvents(props)
     const [numPages, setNumPages] = useState(0);  
     const [page, setPage] = useState(1);
 	const [eventsPerPage, setEventsPerPage] = useState(getInitialPerPage());
-	const [windowSize, setWindowSize] = useState(undefined)
-	
+	const [windowSize, setWindowSize] = useState(undefined);
+
 	// Bug purposes
 	const [initiateListener, setInitiateListener] = useState(1);
 
