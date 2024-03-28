@@ -689,7 +689,7 @@ function EventModal(props)
 										{TimeSelector({label:"Check Out", value:newCheckOutTime, onChange:(e) => setNewCheckOutTime(e)})}  
 									</Grid>
 									<Grid container justifyContent="center" alignItems="center" layout={'row'}>
-										<Button sx={{ mt: 5, width: 175, backgroundColor: "#5f5395", "&:hover": {backgroundColor: "#7566b4"}}} variant="contained" onClick={() => {saveHours()}}>Save</Button>
+										<Button sx={{ mt: 5, width: 175, color: "white", backgroundColor: "#5f5395", "&:hover": {backgroundColor: "#7566b4"}}} variant="contained" onClick={() => {saveHours()}}>Save</Button>
 									</Grid>
 									<ErrorMessage/>
 								</DialogContent>

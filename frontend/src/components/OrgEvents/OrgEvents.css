@@ -135,10 +135,12 @@
 	margin-top: 10px;
 	border: none;
 	float: left;
+	box-shadow: none;
 }
 
 .picBtn:hover{
     background-color: #7566b4;
+	box-shadow: none !important;
 }
 
 .picBtn:visited{
@@ -362,6 +364,7 @@
 
 .checkName{
 	font-size: 50px;
+	color: white;
 }
 
 .qrCodeEvent{
