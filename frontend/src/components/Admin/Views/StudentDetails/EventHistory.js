@@ -99,9 +99,12 @@ function EventHistory({eventHistory})
     setPage(0);
   };
 
-  // useEffect(() => {
-  //   fetchEventInfo();
-  // }, []);
+  const formatDateTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const date = dateTime.toLocaleDateString();
+    const time = dateTime.toLocaleTimeString();
+    return `${date} ${time}`;
+  };
 
   useEffect(() => {
   }, [eventHistory]);
@@ -156,8 +159,8 @@ function EventHistory({eventHistory})
                       <TableCell><Button size='small' variant='contained' disableElevation sx={{backgroundColor: '#5f5395', '&:hover': {
                   backgroundColor: '#4f457c'}}} onClick={() => handleViewClick(singleEvent)}>View</Button></TableCell>
                       <TableCell>{singleEvent.name}</TableCell>
-                      <TableCell>{singleEvent.checkIn}</TableCell>
-                      <TableCell>{singleEvent.checkOut}</TableCell>
+                      <TableCell>{formatDateTime(singleEvent.checkIn)}</TableCell>
+                      <TableCell>{formatDateTime(singleEvent.checkOut)}</TableCell>
                     </TableRow>
                   )
                 )}
@@ -195,8 +198,8 @@ function EventHistory({eventHistory})
             <div className='modalContent' style={{ padding: '25px', maxWidth: '500px' }}>
               {eventDetails?.name && <h1 style={{ marginBottom: '10px', marginTop: '10px'}}>{eventDetails.name}</h1>}
               {eventDetails?.org && <p>Hosting Organization: {eventDetails.org}</p>}
-              {eventDetails?.checkIn && <p>Check In: {eventDetails.checkIn}</p>}
-              {eventDetails?.checkOut && <p>Check Out: {eventDetails.checkOut}</p>}
+              {eventDetails?.checkIn && <p>Check In: {formatDateTime(eventDetails.checkIn)}</p>}
+              {eventDetails?.checkOut && <p>Check Out: {formatDateTime(eventDetails.checkOut)}</p>}
               {eventDetails?.startTime && <p>Start Time: {eventDetails.startTime}</p>}
               {eventDetails?.hours && <p>Hours: {hourString(eventDetails.hours)}<br/></p>}
             </div>
