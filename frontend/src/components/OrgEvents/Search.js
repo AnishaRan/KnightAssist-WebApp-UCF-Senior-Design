@@ -128,7 +128,14 @@ function Search(props) {
     return (
       <div>
         <Stack className="orgSearch" spacing={2} sx={{ width: 300 }}>
-			<TextField label={label} onChange={(e) => setSearchTerm(e.target.value)}/>
+			<TextField label={label} onChange={(e) => setSearchTerm(e.target.value)} 
+				onKeyDown={(e) => {
+					if (e.key === 'Enter') {
+						props.setSearchMode(true); 
+						props.setResetSearchCards(props.resetSearchCards * -1);
+					}
+				}}
+			/>
         </Stack>
       </div>
 
