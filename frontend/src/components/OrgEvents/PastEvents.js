@@ -19,7 +19,8 @@ function PastEvents(props)
     const [numPages, setNumPages] = useState(0);  
     const [page, setPage] = useState(1);
 	const [eventsPerPage, setEventsPerPage] = useState(getInitialPerPage());
-	
+	const [windowSize, setWindowSize] = useState(undefined);
+
 	// Bug purposes
 	const [initiateListener, setInitiateListener] = useState(1);
 
@@ -178,9 +179,8 @@ function PastEvents(props)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
     },[props.reset])
 
-
-	useEffect(()=>{
-		const adjustForSize = () => {
+	useEffect(() => {
+		if(windowSize){
 			if(!eventCards) return;
 			const width = window.innerWidth;
 			
@@ -190,7 +190,7 @@ function PastEvents(props)
 				setEventsPerPage(12);
 				setNumPages(Math.ceil(events.length / 12))
 				changePage(null, Math.ceil((((page - 1) * oldEventsPerPage) + 1) / 12), 12);
-			}else if(width > 1290){
+			}else if(width > 1200){
 				setEventsPerPage(9);
 				setNumPages(Math.ceil(events.length / 9))
 				changePage(null, Math.ceil((((page - 1) * oldEventsPerPage) + 1) / 9), 9);
@@ -204,9 +204,13 @@ function PastEvents(props)
 				changePage(null, Math.ceil((((page - 1) * oldEventsPerPage) + 1) / 3), 3);
 			}
 		}
+	}, [windowSize])
+
+	useEffect(()=>{
+		const adjustForSize = () => {setWindowSize(window.innerWidth);}
 
 		window.addEventListener("resize", adjustForSize);
-	},[initiateListener]);
+	},[initiateListener])
 
     return(
      <div className='upcomingEventsSpace centerCards'>

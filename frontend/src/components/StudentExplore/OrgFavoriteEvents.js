@@ -17,6 +17,7 @@ function OrgFavoriteEvents(props)
     const [numPages, setNumPages] = useState(0);  
     const [page, setPage] = useState(1);
 	const [eventsPerPage, setEventsPerPage] = useState(getInitialPerPage());
+	const [windowSize, setWindowSize] = useState(undefined);
 	
 	// Bug purposes
 	const [initiateListener, setInitiateListener] = useState(1);
@@ -36,6 +37,7 @@ function OrgFavoriteEvents(props)
 	}
 
 	function changePage(e, value, perPage = eventsPerPage){
+		console.log(value);
 		setPage(value);
 		let content = <div className="cards d-flex flex-row cardWhite card-body">{events.slice(perPage * (value - 1), perPage * (value - 1) + perPage)}</div>
 		setEventCards(content);
@@ -104,61 +106,6 @@ function OrgFavoriteEvents(props)
             }
         }   
 
-       /* for(let org of res){
-            url = buildPath(`api/searchEvent?organizationID=${org._id}`);
-
-            response = await fetch(url, {
-                method: "GET",
-                headers: {"Content-Type": "application/json"},
-            });
-        
-            res = JSON.parse(await response.text());
-        
-            console.log(res);    
-
-			url = buildPath(`api/retrieveImage?typeOfImage=2&id=${org._id}`);
-
-			response = await fetch(url, {
-				method: "GET",
-				headers: {"Content-Type": "application/json"},
-			});
-	
-			let orgPic = JSON.parse(await response.text());
-            
-            for(let event of res){
-                let json = {
-                    eventID: event._id,
-                    eventName: event.name,
-                    userID: sessionStorage.getItem("ID"),
-                    check: 1
-                };
-    
-                let url = buildPath(`api/RSVPForEvent`);
-    
-                let response = await fetch(url, {
-                    body: JSON.stringify(json),
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                });
-            
-                let res = JSON.parse(await response.text());
-    
-                // Don't show event if user already RSVP'd
-                if(res.RSVPStatus !== 1 && eventIsUpcoming(event.endTime)){
-					url = buildPath(`api/retrieveImage?typeOfImage=1&id=${event._id}`);
-
-					response = await fetch(url, {
-						method: "GET",
-						headers: {"Content-Type": "application/json"},
-					});
-			
-					let pic = JSON.parse(await response.text());
-
-					events.push(<Event name={event.name} pic={pic} orgName={org.name} orgPic={orgPic.url} startTime={event.startTime} endTime={event.endTime} id={event._id}/>)
-				}
-            }
-        }  */     
-
         events.sort(function(a,b){ 
             return a.props.startTime.localeCompare(b.props.startTime)
         });
@@ -210,7 +157,7 @@ function OrgFavoriteEvents(props)
                         <CardContent className='whiteCardSection' style={{backgroundColor: (sessionStorage.getItem("theme") === "light") ? "white" : "#1e1e1e"}}>
                             <div className='initialText'>
     							<Typography className='eventName' clagutterBottom variant="h6" component="div">
-                                    {((props.name.length >= 23) ? (props.name.substring(0, 23) + "...") : props.name)}
+                                    {((props.name.length >= 40) ? (props.name.substring(0, 40) + "...") : props.name)}
                                 </Typography>
                                 <Typography sx={{transform: 'translateY(20px)'}} className="eventDate" variant="body2" color="text.secondary">
                                     <Grid container direction="row" sx={{display: 'flex', justifyContent: 'center'}}><Avatar className="orgPicCard" src={props.orgPic}/>{props.orgName}</Grid>
@@ -220,7 +167,7 @@ function OrgFavoriteEvents(props)
                             </div>
                             <div className='hoverText'>
                                 <Typography>
-                                    {((props.description.length >= 160) ? (props.description.substring(0, 160) + "...") : props.description)}
+                                    {((props.description.length >= 180) ? (props.description.substring(0, 180) + "...") : props.description)}
                                 </Typography>
                             </div>
                         </CardContent>
@@ -245,21 +192,21 @@ function OrgFavoriteEvents(props)
     },[])
 
     useEffect(()=>{
-        console.log("its working!")
         getEvents();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
     },[props.reset])
 
-	useEffect(()=>{
-		const adjustForSize = () => {
+	useEffect(() => {
+		if(windowSize){
 			if(!eventCards) return;
-			const width = window.innerWidth;
+			
+			const width = windowSize;
 			
 			const oldEventsPerPage = eventsPerPage;
 
 			if(width > 1500){
 				setEventsPerPage(4);
-				setNumPages(Math.ceil(events.length / 4))
+				setNumPages(Math.ceil(events.length / 4));
 				changePage(null, Math.ceil((((page - 1) * oldEventsPerPage) + 1) / 4), 4);
 			}else if(width > 1200){
 				setEventsPerPage(3);
@@ -275,6 +222,10 @@ function OrgFavoriteEvents(props)
 				changePage(null, Math.ceil((((page - 1) * oldEventsPerPage) + 1) / 1), 1);
 			}
 		}
+	}, [windowSize])
+
+	useEffect(()=>{
+		const adjustForSize = () => {setWindowSize(window.innerWidth);}
 
 		window.addEventListener("resize", adjustForSize);
 	},[initiateListener])

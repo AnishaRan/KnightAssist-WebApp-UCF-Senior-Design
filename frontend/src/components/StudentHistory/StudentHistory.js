@@ -31,6 +31,24 @@ function StudentHistory()
 		setOpenModal(true);
 	}
 
+	function hourString(totalHours){
+		const hourStr = totalHours.toString();
+
+		// It is a whole hour
+		if(!hourStr.includes('.')) return hourStr + ":00";
+
+		const hours = hourStr.substring(0, hourStr.indexOf("."));
+
+		const noHours = hours === "";
+
+		// Less than 10 minutes
+		const leadingZero = Number(hourStr.substring(hourStr.indexOf(".") + 1)) < 17;
+
+		const minutes = Math.round((Number(hourStr.substring(hourStr.indexOf(".") + 1)) / 100) * 60);
+
+		return ((noHours) ? "0" : "") + hours + ":" + ((leadingZero) ? "0" : "") + minutes;
+	}
+
     async function changePage(e, value){
         setPage(value);
 
@@ -63,7 +81,7 @@ function StudentHistory()
 															</span>} 						
 														secondary={<span style={{ whiteSpace: 'pre-wrap' }}>
 														{"Check In: " + history.checkIn[0] + " at " + history.checkIn[1] 
-														+ "\nCheck Out: " + history.checkOut[0] + " at " + history.checkOut[1] + "\nHours Accumulated:"} <span className='hoursColor'>+{history.hours} {((history.wasAdjusted) ? " (Adjusted)" : "")}</span>
+														+ "\nCheck Out: " + history.checkOut[0] + " at " + history.checkOut[1] + "\nHours Accumulated:"} <span className='hoursColor'>+{hourString(history.hours)} {((history.wasAdjusted) ? " (Adjusted)" : "")}</span>
 															</span>}
 										/>
 									</Grid>
@@ -132,7 +150,7 @@ function StudentHistory()
 																</span>} 						
 														secondary={<span style={{ whiteSpace: 'pre-wrap' }}>
 															{"Check In: " + history.checkIn[0] + " at " + history.checkIn[1] 
-															+ "\nCheck Out: " + history.checkOut[0] + " at " + history.checkOut[1] + "\nHours Accumulated:"} <span className='hoursColor'>+{history.hours} {((history.wasAdjusted) ? " (Adjusted)" : "")}</span>
+															+ "\nCheck Out: " + history.checkOut[0] + " at " + history.checkOut[1] + "\nHours Accumulated:"} <span className='hoursColor'>+{hourString(history.hours)} {((history.wasAdjusted) ? " (Adjusted)" : "")}</span>
 																</span>}
 											/>
 										</Grid>

@@ -27,14 +27,27 @@ function StudentHome()
   const [upcomingRSVPdEvents, setUpcomingRSVPdEvents] = useState([]);
   const [upcomingRSVPdEventsLength, setUpcomingRSVPdEventsLength] = useState(0);
 
-  const updateUpcomingRSVPdEventsLength = (newValue) => {
-    setUpcomingRSVPdEventsLength(newValue);
-  };
+	const updateUpcomingRSVPdEventsLength = (newValue) => {
+		setUpcomingRSVPdEventsLength(newValue);
+	};
     
-    useEffect(() => {
-      getStudentInfo();
-	  // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+	function hourString(totalHours){
+		const hourStr = totalHours.toString();
+
+		// It is a whole hour
+		if(!hourStr.includes('.')) return hourStr + ":00";
+
+		const hours = hourStr.substring(0, hourStr.indexOf("."));
+
+		const noHours = hours === "";
+
+		// Less than 10 minutes
+		const leadingZero = Number(hourStr.substring(hourStr.indexOf(".") + 1)) < 17;
+
+		const minutes = Math.round((Number(hourStr.substring(hourStr.indexOf(".") + 1)) / 100) * 60);
+
+		return ((noHours) ? "0" : "") + hours + ":" + ((leadingZero) ? "0" : "") + minutes;
+	}
 
     async function getStudentInfo() {
       const email = '';
@@ -50,7 +63,7 @@ function StudentHome()
 
         fetchUpcomingEvents(res.eventsRSVP);
         setGoal(res.semesterVolunteerHourGoal);
-        setTotalHours(res.totalVolunteerHours);
+        setTotalHours(hourString(res.totalVolunteerHours));
         setFavOrgs(res.favoritedOrganizations);
     
         
@@ -98,6 +111,11 @@ function StudentHome()
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [upcomingRSVPdEvents]);
 
+	useEffect(() => {
+		getStudentInfo();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
    return(
     
       <div className='spartan' id='homePage'>
@@ -114,7 +132,7 @@ function StudentHome()
                   </Grid>
                   <Grid item>
                     <Typography variant="subtitle1" color="black" style={{ textAlign: 'left' }}>Semester Goal</Typography>
-                    <Typography variant="h5" style={{ textAlign: 'left', fontWeight: 'bold', color: 'black' }}>{goal} hrs</Typography>
+                    <Typography variant="h5" style={{ textAlign: 'left', fontWeight: 'bold', color: 'black' }}>{goal} Hours</Typography>
                   </Grid>
                 </Grid>
               </CardContent>
@@ -126,8 +144,8 @@ function StudentHome()
                     <Avatar aria-label="icon" style={{ backgroundColor: '#A4D0AE' }}><TaskAltIcon style={{ color: 'black' }}/></Avatar>
                   </Grid>
                   <Grid item>
-                    <Typography variant="subtitle1" color="black" style={{ textAlign: 'left' }}>Total hours</Typography>
-                    <Typography variant="h5" style={{ textAlign: 'left', fontWeight: 'bold', color: 'black' }}>{totalHours} hrs</Typography>
+                    <Typography variant="subtitle1" color="black" style={{ textAlign: 'left' }}>Total Hours</Typography>
+                    <Typography variant="h5" style={{ textAlign: 'left', fontWeight: 'bold', color: 'black' }}>{totalHours} Hours</Typography>
                   </Grid>
                 </Grid>
               </CardContent>

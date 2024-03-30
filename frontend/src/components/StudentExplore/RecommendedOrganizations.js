@@ -17,6 +17,7 @@ function RecommendedOrganizations(props)
     const [numPages, setNumPages] = useState(0);  
     const [page, setPage] = useState(1);
 	const [orgsPerPage, setOrgsPerPage] = useState(getInitialPerPage());
+	const [windowSize, setWindowSize] = useState(undefined);
 	
 	// Bug purposes
 	const [initiateListener, setInitiateListener] = useState(1);
@@ -151,17 +152,17 @@ function RecommendedOrganizations(props)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-	useEffect(()=>{
-		const adjustForSize = () => {
+	useEffect(() => {
+		if(windowSize){
 			if(!orgCards) return;
-
-			const width = window.innerWidth;
+			
+			const width = windowSize;
 			
 			const oldOrgsPerPage = orgsPerPage;
 
 			if(width > 1500){
 				setOrgsPerPage(4);
-				setNumPages(Math.ceil(orgs.length / 4))
+				setNumPages(Math.ceil(orgs.length / 4));
 				changePage(null, Math.ceil((((page - 1) * oldOrgsPerPage) + 1) / 4), 4);
 			}else if(width > 1200){
 				setOrgsPerPage(3);
@@ -177,9 +178,13 @@ function RecommendedOrganizations(props)
 				changePage(null, Math.ceil((((page - 1) * oldOrgsPerPage) + 1) / 1), 1);
 			}
 		}
+	}, [windowSize])
+
+	useEffect(()=>{
+		const adjustForSize = () => {setWindowSize(window.innerWidth);}
 
 		window.addEventListener("resize", adjustForSize);
-	},[initiateListener])
+	},[initiateListener]);
 
     return(
      <div className='upcomingEventsSpace'>

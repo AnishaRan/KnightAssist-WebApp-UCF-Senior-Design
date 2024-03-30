@@ -17,6 +17,7 @@ function RecommendedEvents(props)
     const [numPages, setNumPages] = useState(0);  
     const [page, setPage] = useState(1);
 	const [eventsPerPage, setEventsPerPage] = useState(getInitialPerPage());
+	const [windowSize, setWindowSize] = useState(undefined);
 	
 	// Bug purposes
 	const [initiateListener, setInitiateListener] = useState(1);
@@ -187,22 +188,21 @@ function RecommendedEvents(props)
     },[])
 
     useEffect(()=>{
-        console.log("its working!")
         getEvents();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
     },[props.reset])
 
-	useEffect(()=>{
-		const adjustForSize = () => {
+	useEffect(() => {
+		if(windowSize){
 			if(!eventCards) return;
-
-			const width = window.innerWidth;
+			
+			const width = windowSize;
 			
 			const oldEventsPerPage = eventsPerPage;
 
 			if(width > 1500){
 				setEventsPerPage(4);
-				setNumPages(Math.ceil(events.length / 4))
+				setNumPages(Math.ceil(events.length / 4));
 				changePage(null, Math.ceil((((page - 1) * oldEventsPerPage) + 1) / 4), 4);
 			}else if(width > 1200){
 				setEventsPerPage(3);
@@ -218,9 +218,14 @@ function RecommendedEvents(props)
 				changePage(null, Math.ceil((((page - 1) * oldEventsPerPage) + 1) / 1), 1);
 			}
 		}
+	}, [windowSize])
+
+	useEffect(()=>{
+		const adjustForSize = () => {setWindowSize(window.innerWidth);}
 
 		window.addEventListener("resize", adjustForSize);
 	},[initiateListener])
+
 
     return(
      <div className='upcomingEventsSpace'>
