@@ -8,6 +8,7 @@ import { Avatar, Box, CardActionArea, CircularProgress, Grid } from '@mui/materi
 import Pagination from '@mui/material/Pagination';
 import '../OrgEvents/OrgEvents';
 import { CalendarIcon } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 
 function OrgFavoriteEvents(props)
 {
@@ -140,8 +141,8 @@ function OrgFavoriteEvents(props)
     }
 
     function Event(props) {     
-		const startDay = props.startTime.substring(0, props.startTime.indexOf("T"));
-		const endDay = props.endTime.substring(0, props.endTime.indexOf("T"));
+		const startDay = new Date(dayjs(props.startTime)).toLocaleDateString();
+		const endDay = new Date(dayjs(props.endTime)).toLocaleDateString();
 
 		let hasEndDate = (startDay !== endDay);
 

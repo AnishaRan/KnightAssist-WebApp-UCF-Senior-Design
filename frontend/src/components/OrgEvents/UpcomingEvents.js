@@ -9,6 +9,7 @@ import { CardActionArea, CircularProgress } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import './OrgEvents';
 import { CalendarIcon } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 
 function UpcomingEvents(props)
 {
@@ -124,13 +125,12 @@ function UpcomingEvents(props)
         setEventCards(content);
     }
 
-    function EventHeader(){
-        return <h1 className='upcomingEvents spartan'>Your Upcoming Events</h1>
-    }
 
     function Event(props) {     
-		const startDay = props.startTime.substring(0, props.startTime.indexOf("T"));
-		const endDay = props.endTime.substring(0, props.endTime.indexOf("T"));
+		const startDay = new Date(dayjs(props.startTime)).toLocaleDateString();
+		const endDay = new Date(dayjs(props.endTime)).toLocaleDateString();
+
+		console.log(startDay)
 
 		let hasEndDate = (startDay !== endDay);
 

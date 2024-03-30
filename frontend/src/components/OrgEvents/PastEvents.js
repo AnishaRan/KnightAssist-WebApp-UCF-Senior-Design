@@ -10,6 +10,7 @@ import { CardActionArea, CircularProgress } from '@mui/material';
 import './OrgEvents';
 import { CalendarIcon, TimeIcon } from '@mui/x-date-pickers';
 import { PlayArrow } from '@mui/icons-material';
+import dayjs from 'dayjs';
 
 function PastEvents(props)
 {
@@ -126,13 +127,10 @@ function PastEvents(props)
         setEventCards(content);
     }
 
-    function EventHeader(){
-        return <h1 className='upcomingEvents spartan'>Your Past Events</h1>
-    }
 
     function Event(props) {     
-		const startDay = props.startTime.substring(0, props.startTime.indexOf("T"));
-		const endDay = props.endTime.substring(0, props.endTime.indexOf("T"));
+		const startDay = new Date(dayjs(props.startTime)).toLocaleDateString();
+		const endDay = new Date(dayjs(props.endTime)).toLocaleDateString();
 
 		let hasEndDate = (startDay !== endDay);
 
