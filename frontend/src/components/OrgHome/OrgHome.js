@@ -135,26 +135,42 @@ function OrgHome() {
 						<Bar
 							type='bar'
 							data={chartData.data}
+							color={(sessionStorage.getItem("theme") === "light") ? "gray" : "white"}
 							options={
 								{
+									color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 									scales: {
 										y: {
 											beginAtZero: true,
 											title: {
 												display: true,
 												text: 'Number of Attendees',
+												color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 												font: {
-													size: 20
+													size: 20,
 												}
+											},
+											grid: {
+												color: (sessionStorage.getItem("theme") === "light") ? "lightgray" : "gray"
+											},
+											ticks: {
+												color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 											}
 										},
 										x: {
 											title: {
 												display: true,
 												text: 'Event Names',
+												color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 												font: {
 													size: 20
 												}
+											},
+											grid: {
+												color: (sessionStorage.getItem("theme") === "light") ? "lightgray" : "gray"
+											},
+											ticks: {
+												color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 											}
 										}
 									},
@@ -164,13 +180,15 @@ function OrgHome() {
 										title: {
 											display: true,
 											text: 'Event Attendance Analysis',
+											color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 											font: {
 												size: 25
-											}
+											},
 										},
 										subtitle: {
 											display: true,
-											text: (hoverImage) ? '(Click anywhere to view all past event data)' : '           '
+											text: (hoverImage) ? '(Click anywhere to view all past event data)' : '           ',
+											color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 										}
 									}
 								}
@@ -189,26 +207,42 @@ function OrgHome() {
 						<Bar
 							type='bar'
 							data={fullChartData.data}
+							color={(sessionStorage.getItem("theme") === "light") ? "gray" : "white"}
 							options={
 								{
+									color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 									scales: {
 										y: {
 											beginAtZero: true,
 											title: {
 												display: true,
 												text: 'Number of Attendees',
+												color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 												font: {
-													size: 20
+													size: 20,
 												}
+											},
+											ticks:{
+												color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
+											},
+											grid: {
+												color: (sessionStorage.getItem("theme") === "light") ? "lightgray" : "gray"
 											}
 										},
 										x: {
 											title: {
 												display: true,
 												text: 'Event Names',
+												color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 												font: {
 													size: 20
-												}
+												},
+											},
+											ticks:{
+												color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
+											},
+											grid: {
+												color: (sessionStorage.getItem("theme") === "light") ? "lightgray" : "gray"
 											}
 										}
 									},
@@ -218,6 +252,7 @@ function OrgHome() {
 										title: {
 											display: true,
 											text: 'Event Attendance Analysis',
+											color: (sessionStorage.getItem("theme") === "light") ? "gray" : "white",
 											font: {
 												size: 25
 											}
