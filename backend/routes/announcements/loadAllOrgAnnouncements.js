@@ -21,7 +21,8 @@ router.get('/', async (req, res) => {
                                 title: update.title,
                                 content: update.content,
                                 date: update.date,
-                                updateID: update._id
+                                updateID: update._id,
+								organizationName: organization.name
                         };
                 });
 
