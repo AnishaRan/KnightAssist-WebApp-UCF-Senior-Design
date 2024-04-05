@@ -415,11 +415,11 @@ function PostVerifiedQuestions()
 						<MenuItem onClick={() => {document.getElementById("profilePic").click(); setOpenPicSelectChoice(null);}}>Upload</MenuItem>
 						<MenuItem onClick={() => {setOpenDefaultPFPModal(true); setOpenPicSelectChoice(null);}}>Select Default PFP</MenuItem>
 					</Menu>
-					<input ref={profilePicSelect} id="profilePic" type="file" accept="image/png, image/gif, image/jpg image/jpeg" style={{display:"none"}} onChange={() => {if(validateImgSelection(profilePicSelect)){setPicName(URL.createObjectURL(profilePicSelect.current.files[0])); setPicFile(profilePicSelect.current.files[0])}}}/>
+					<input ref={profilePicSelect} id="profilePic" type="file" accept="image/*" style={{display:"none"}} onChange={() => {if(validateImgSelection(profilePicSelect)){setPicName(URL.createObjectURL(profilePicSelect.current.files[0])); setPicFile(profilePicSelect.current.files[0])}}}/>
 					{(role === "organization") ? 
 						<div>
 							<label for="background" className="selectPPic btn btn-primary">Select Background</label>
-							<input ref={backgroundSelect} id="background" type="file" accept="image/png, image/gif, image/jpg image/jpeg" style={{display:"none"}} onChange={() => {if(validateImgSelection(backgroundSelect)){setBGName(URL.createObjectURL(backgroundSelect.current.files[0])); setBGFile(backgroundSelect.current.files[0])}}}/>
+							<input ref={backgroundSelect} id="background" type="file" accept="image/*" style={{display:"none"}} onChange={() => {if(validateImgSelection(backgroundSelect)){setBGName(URL.createObjectURL(backgroundSelect.current.files[0])); setBGFile(backgroundSelect.current.files[0])}}}/>
 						</div>
 						: ""
 					}

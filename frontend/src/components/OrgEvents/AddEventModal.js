@@ -335,7 +335,7 @@ function AddEventModal(props)
 				<div className='imgDemo'>
 					{(picName != null) ? <img className="imgDemo" src={picName} alt=''/> : ""}
 				</div>
-                <input ref={fileSelect} id="upload" type="file" accept="image/png, image/gif, image/jpg image/jpeg" style={{display:"none"}} onChange={() => {if(validateImgSelection(fileSelect)){setPicName(URL.createObjectURL(fileSelect.current.files[0])); setPicFile(fileSelect.current.files[0])}}}/>
+                <input ref={fileSelect} id="upload" type="file" accept="image/*" style={{display:"none"}} onChange={() => {if(validateImgSelection(fileSelect)){setPicName(URL.createObjectURL(fileSelect.current.files[0])); setPicFile(fileSelect.current.files[0])}}}/>
             </Grid>
         )
     }
@@ -393,7 +393,8 @@ function AddEventModal(props)
     }   
 
     const createTag = () => {
-
+		if(currentTag === "") return;
+		
         setTags(tags.concat(<div>
             {Tag({"tag": currentTag})}
         </div>));
