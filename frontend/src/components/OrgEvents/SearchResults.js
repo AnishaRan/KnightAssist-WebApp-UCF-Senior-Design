@@ -126,48 +126,52 @@ function SearchResults(props)
         let events = [];
 
         for(let i of props.results.current){
-			let url = buildPath(`api/searchOneEvent?eventID=${i.id}`);
+			try {
+				let url = buildPath(`api/searchOneEvent?eventID=${i.id}`);
 
-			let response = await fetch(url, {
-				method: "GET",
-				headers: {"Content-Type": "application/json"},
-			});
-
-			let event = JSON.parse(await response.text());
-
-			// Not found
-			if(event.length < 1) continue
-
-			event = event[0];
-
-			url = buildPath(`api/retrieveImage?typeOfImage=1&id=${event._id}`);
-
-			response = await fetch(url, {
-				method: "GET",
-				headers: {"Content-Type": "application/json"},
-			});
+				let response = await fetch(url, {
+					method: "GET",
+					headers: {"Content-Type": "application/json"},
+				});
 	
-			let pic = JSON.parse(await response.text());
-			
-			url = buildPath(`api/organizationSearch?organizationID=${event.sponsoringOrganization}`);
-
-			response = await fetch(url, {
-				method: "GET",
-				headers: {"Content-Type": "application/json"},
-			});
-
-			let org = JSON.parse(await response.text());
-			
-			url = buildPath(`api/retrieveImage?typeOfImage=2&id=${event.sponsoringOrganization}`);
-
-			response = await fetch(url, {
-				method: "GET",
-				headers: {"Content-Type": "application/json"},
-			});
+				let event = JSON.parse(await response.text());
 	
-			let orgPic = JSON.parse(await response.text());
-
-			events.push(<Event name={event.name} pic={pic} orgName={(sessionStorage.getItem("role") === "volunteer") ? org.name : undefined} orgPic={(sessionStorage.getItem("role") === "volunteer") ? orgPic.url : undefined} startTime={event.startTime} endTime={event.endTime} id={event._id}/>)
+				// Not found
+				if(event.length < 1) continue
+	
+				event = event[0];
+	
+				url = buildPath(`api/retrieveImage?typeOfImage=1&id=${event._id}`);
+	
+				response = await fetch(url, {
+					method: "GET",
+					headers: {"Content-Type": "application/json"},
+				});
+		
+				let pic = JSON.parse(await response.text());
+				
+				url = buildPath(`api/organizationSearch?organizationID=${event.sponsoringOrganization}`);
+	
+				response = await fetch(url, {
+					method: "GET",
+					headers: {"Content-Type": "application/json"},
+				});
+	
+				let org = JSON.parse(await response.text());
+				
+				url = buildPath(`api/retrieveImage?typeOfImage=2&id=${event.sponsoringOrganization}`);
+	
+				response = await fetch(url, {
+					method: "GET",
+					headers: {"Content-Type": "application/json"},
+				});
+		
+				let orgPic = JSON.parse(await response.text());
+	
+				events.push(<Event name={event.name} pic={pic} orgName={(sessionStorage.getItem("role") === "volunteer") ? org.name : undefined} orgPic={(sessionStorage.getItem("role") === "volunteer") ? orgPic.url : undefined} startTime={event.startTime} endTime={event.endTime} id={event._id}/>);
+			}catch(e){
+				continue;
+			}
         }       
 
 		events.sort(function(a,b){ 
