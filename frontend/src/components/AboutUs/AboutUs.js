@@ -37,7 +37,7 @@ function AboutUs()
 						</Typography>
 					</Grid>
 				</Grid>
-				<Box sx={{ display: 'flex', flexDirection: 'column', background: 'linear-gradient(to right, #F5FAF9, #E4D9FB)', minWidth: '100vw', justifyContent: 'center', alignItems: 'center'}}>
+				<Box sx={{ display: 'flex', flexDirection: 'column', background: 'linear-gradient(to right, #F5FAF9, #E4D9FB)', minWidth: '100%', justifyContent: 'center', alignItems: 'center'}}>
 					<Team />
 				</Box>
 				<Footer />
