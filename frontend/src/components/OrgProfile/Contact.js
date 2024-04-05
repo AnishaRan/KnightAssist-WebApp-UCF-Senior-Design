@@ -234,7 +234,7 @@ function Contact(props) {
 									<Grid>
 										<Grid container justifyContent="right" alignItems="center" layout={'row'} className='times'>
 											<p className='dayText'>Sunday:</p>
-											{TimeSelector({label: "Start", value: sundayStart, onChange:(e) => {setSundayStart(e); if(!props.editInfo.current.hours.sunday) props.editInfo.current.hours.sunday = {}; props.editInfo.current.hours.sunday.start = e; console.log(e)}})}
+											{TimeSelector({label: "Start", value: sundayStart, onChange:(e) => {setSundayStart(e); if(!props.editInfo.current.hours.sunday) props.editInfo.current.hours.sunday = {}; props.editInfo.current.hours.sunday.start = e;}})}
 											{TimeSelector({label: "End", value: sundayEnd, onChange:(e) => {setSundayEnd(e); if(!props.editInfo.current.hours.sunday) props.editInfo.current.hours.sunday = {}; props.editInfo.current.hours.sunday.start = e;}})}
 										</Grid>
 										<Grid container justifyContent="right" alignItems="center" layout={'row'} className='times'>

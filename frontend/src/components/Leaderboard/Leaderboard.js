@@ -229,10 +229,7 @@ function Leaderboard() {
 		if(name.length >= 30){
 			name = name.substring(0, 30) + "..."
 		}
-
-		if(name === "Noah Seligson")
-			student.numEvents += 1;
-
+		
 		return (
 			<Grid container justifyContent="center" alignItems="center">
 				<Card className={"rankCard" + color} variant="outlined">
