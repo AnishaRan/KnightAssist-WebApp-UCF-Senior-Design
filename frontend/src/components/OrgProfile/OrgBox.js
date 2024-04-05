@@ -347,7 +347,7 @@ function OrgBox(props) {
 					className='picAvatar'
 					sx={{ width: 100, height: 100, marginBottom: "16px", marginLeft: "-12%"}} 
 				/>
-				{(props.editMode) ? <TbEditCircle className="editIcon" onClick={openPicSelectMenu}/> : null}
+				{(props.editMode) ? <TbEditCircle className="editIconOrg" onClick={openPicSelectMenu}/> : null}
 				{(role === "volunteer") ? <div><Tooltip title={(favorited) ? "Unfavorite" : "Favorite"} placement='right'><BsHeartFill size="28px" className="heartIconBehind"/> {((heartHover) ? <BsHeartFill size="26px" className="heartIcon hoverHeart" onClick={() => favoriteOrg(true)} onMouseLeave={() => setHeartHover(false)}/> : <BsHeartFill size="26px" className={"heartIcon " + ((favorited) ? "redHeart" : "whiteHeart")} onMouseOver={() => setHeartHover(true)}/>)}</Tooltip></div> : null}
 				<Menu
 					open={Boolean(openPicSelectChoice)}
