@@ -129,7 +129,8 @@ function Contact(props) {
 				const days = [];
 	
 				for(let name of dayNames){
-					if(name in props.org.workingHoursPerWeek){
+					if(name in props.org.workingHoursPerWeek && props.org.workingHoursPerWeek[name].start 
+					  && props.org.workingHoursPerWeek[name].end){
 						days.push([name, props.org.workingHoursPerWeek[name].start, props.org.workingHoursPerWeek[name].end]);
 					}else{
 						days.push([name, "No Office Hours"]);
@@ -146,7 +147,7 @@ function Contact(props) {
         return (
             <Grid sx={{marginLeft: 1, marginRight: 1, marginBottom: 1, width: 150}}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-					<TimePicker label={props.label} value={dayjs(props.value)} onChange={props.onChange}/>
+					<TimePicker label={props.label} value={(props.value) ? dayjs(props.value) : undefined} onChange={props.onChange}/>
                 </LocalizationProvider>                                      
             </Grid>      
         )

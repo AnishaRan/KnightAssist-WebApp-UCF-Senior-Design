@@ -229,7 +229,7 @@ function Leaderboard() {
 		if(name.length >= 30){
 			name = name.substring(0, 30) + "..."
 		}
-
+		
 		return (
 			<Grid container justifyContent="center" alignItems="center">
 				<Card className={"rankCard" + color} variant="outlined">
