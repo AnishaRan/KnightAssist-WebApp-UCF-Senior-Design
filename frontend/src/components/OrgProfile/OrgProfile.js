@@ -76,7 +76,7 @@ function OrgProfile() {
 					className={'orgBannerFiller picAvatar' + ((editMode) ? " blurBanner": "")}
 				/>	
 				{(editMode) ? <TbEditCircle className="editIconBanner" onClick={() => document.getElementById("background").click()}/> : null}
-				<input ref={backgroundSelect} id="background" type="file" accept="image/png, image/gif, image/jpg image/jpeg" style={{display:"none"}} onChange={() => {if(validateImgSelection(backgroundSelect)){setBGFile(URL.createObjectURL(backgroundSelect.current.files[0])); editInfo.current.background = backgroundSelect.current.files[0];}}}/>
+				<input ref={backgroundSelect} id="background" type="file" accept="image/*" style={{display:"none"}} onChange={() => {if(validateImgSelection(backgroundSelect)){setBGFile(URL.createObjectURL(backgroundSelect.current.files[0])); editInfo.current.background = backgroundSelect.current.files[0];}}}/>
 			</div>
 		)
 	}
