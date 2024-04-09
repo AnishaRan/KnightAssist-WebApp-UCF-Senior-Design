@@ -15,8 +15,21 @@ router.get('/', async (req, res) => {
 		// Ensure that an existing not isn't pushed
 		const messageSet = new Set();
 
-		for(let noto of user.notifications)
+		for(let i = 0; i < user.notifications.length; i++){
+			let noto = user.notifications[i];
+
+			// Delete notos for deleted events
+			if(noto.type_is === "event"){
+				let event = await Event.findById(noto.eventId);
+				if(!event){
+					user.notifications.splice(i, 1);
+					i--;
+					await user.save();
+				}
+			}
+
 			messageSet.add(noto.message);
+		}
 
         const favoriteOrgsUpdates = await Organization.find({
             favorites: userId,
