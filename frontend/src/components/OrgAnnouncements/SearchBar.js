@@ -51,7 +51,7 @@ const handleKeyPress = (event, btn) => {
   }, [searchTerm]);
 
   return (
-    <div className="shortenSearch classes.root" variant="body1">
+    <div className="classes.root" variant="body1">
       <TextField
         placeholder="Search by Announcement Name"
         value={searchTerm}

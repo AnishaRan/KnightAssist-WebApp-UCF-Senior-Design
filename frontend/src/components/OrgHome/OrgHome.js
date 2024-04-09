@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import AddAnnouncementModal from './AddAnnouncementModal';
 import Header from '../OrgEvents/Header';
 import './OrgHome.css';
 import NextEventCard from './NextEvent';
@@ -15,7 +14,6 @@ import { Bar } from "react-chartjs-2";
 import { buildPath } from '../../path';
 
 function OrgHome() {
-	const [openAnnouncement, setOpenAnnouncement] = useState(false);
 	const [orgName, setOrgName] = useState("");
 	const [upcomingEvents, setUpcomingEvents] = useState([]);
 	const [numUpcomingEvents, setNumUpcomingEvents] = useState(0);
@@ -113,10 +111,6 @@ function OrgHome() {
               <Typography variant="h5">
                 Welcome, {orgName}
               </Typography>
-              <Button variant="contained" sx={{color: 'white', backgroundColor: '#5B4E77'}} className="addEventBtn" onClick={() => setOpenAnnouncement(true)}>
-                Add Announcement
-              </Button>
-              <AddAnnouncementModal open={openAnnouncement} setOpen={setOpenAnnouncement} />
             </CardContent>
           </Card>
         </div>

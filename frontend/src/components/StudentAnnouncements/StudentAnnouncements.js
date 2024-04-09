@@ -225,6 +225,8 @@ function NewAnn() {
       <div className="moveEverything">
         <div className="testing">
           <div className="announcementSection">
+		  {(searchAnnouncement) ?
+
           <div style={{marginLeft: '12%'}}>
             <div className="topSection">
 			  <Filter searchAnnouncements={searchAnnouncements} filterAnnouncements={filterAnnouncements} />
@@ -240,8 +242,9 @@ function NewAnn() {
                 initialAnnouncements={announcements}
               />
             </div>
-            {(searchAnnouncement) ? <Announcements announcements={searchAnnouncement} /> : <div className='centerProgress'><CircularProgress/></div>}
+             <Announcements announcements={searchAnnouncement} />
           </div>
+		  	: <div className='centerProgress'><CircularProgress/></div>}
         </div>
         </div>
       </div>

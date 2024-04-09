@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from "./SearchBar.js";
 import Announcements from "./Announcements.js";
 import { buildPath } from '../../path.js';
-import { CircularProgress } from '@mui/material';
+import {Button, CircularProgress } from '@mui/material';
 import Header from '../OrgEvents/Header.js';
 import OrgTopBar from '../OrgHome/OrgTopBar.js';
+import AddAnnouncementModal from './AddAnnouncementModal.js';
 
 function OrgAnn() {
   var [announcements, setAnnouncements] = useState([]);
@@ -13,7 +14,10 @@ function OrgAnn() {
   //var [favOrgs, setFavOrgs] = useState([]);
   var [favUpdates, setFavUpdates] = useState([]);
   var [finalFavUpdates, setFinalFavUpdates] = useState([]);
+  const [openAnnouncement, setOpenAnnouncement] = useState(false);
 
+  // For after you add an announcement
+  const [reset, setReset] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const fetchAllUpdates = async () => {
@@ -80,7 +84,7 @@ function OrgAnn() {
 
 	getUpdates();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reset]);
 
   return (
     <div className='spartan' id="studentAnnouncements">
@@ -90,18 +94,24 @@ function OrgAnn() {
         <div className="testing">
           <div className="announcementSection">
           <div style={{marginLeft: '12%'}}>
-            <div className="topSection">
-              <SearchBar
-                searchAnnouncements={searchAnnouncements}
-                setSearchTerm={setSearchTerm}
-                searchTerm={searchTerm}
-                filterTerm={filterTerm}
-                setFilterTerm={setFilterTerm}
-                fetchAllUpdates={fetchAllUpdates}
-                finalFavUpdates = {finalFavUpdates}
-                setSearchAnnouncement={setSearchAnnouncement}
-                initialAnnouncements={announcements}
-              />
+            <div>
+			  <div className='orgBarSpace'>
+				<SearchBar
+					searchAnnouncements={searchAnnouncements}
+					setSearchTerm={setSearchTerm}
+					searchTerm={searchTerm}
+					filterTerm={filterTerm}
+					setFilterTerm={setFilterTerm}
+					fetchAllUpdates={fetchAllUpdates}
+					finalFavUpdates = {finalFavUpdates}
+					setSearchAnnouncement={setSearchAnnouncement}
+					initialAnnouncements={announcements}
+				/>
+			  </div>
+			  <Button variant="contained" sx={{marginTop: 1, color: 'white', backgroundColor: '#5B4E77'}} className="addEventBtn" onClick={() => setOpenAnnouncement(true)}>
+				Add Announcement
+			  </Button>
+			  <AddAnnouncementModal open={openAnnouncement} setOpen={setOpenAnnouncement} reset={reset} setReset={setReset}/>
             </div>
             {(searchAnnouncement) ? <Announcements announcements={searchAnnouncement} /> : <div className='centerProgress'><CircularProgress/></div>}
           </div>

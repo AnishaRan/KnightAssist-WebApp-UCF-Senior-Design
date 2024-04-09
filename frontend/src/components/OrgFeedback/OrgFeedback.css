@@ -34,7 +34,12 @@
 }
     
 .centerProgress{
-	margin-left: 33%;
+	margin-left: 45%;
+	margin-top: 20%;
+}
+
+.centerProgressFB{
+	margin-left: 10%;
 	margin-top: 20%;
 }
 

@@ -12,7 +12,7 @@ import { buildPath } from '../../path';
 import { useState} from 'react';
 
 function AddAnnouncementModal(props){
-	const handleClose = () => {resetValues(); props.setOpen(false);}
+	const handleClose = () => {resetValues(); props.setOpen(false); props.setReset(!props.reset)}
 
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");

@@ -16,6 +16,13 @@
 .topSection {
     margin-bottom: 12px;
 	max-width: 400px;
+	float: left;
+}
+
+.topSectionOrg{
+    margin-bottom: 12px;
+	max-width: 2000px !important;
+	float: left;
 }
 
 .announcementSection {
@@ -53,9 +60,27 @@
 	height: 25px !important;
 }
 
+.orgBarSpace{
+	margin-right: 10%;
+	max-width: 400px;
+	float: left;
+}
+
+@media (max-width: 1200px) {
+	.orgBarSpace{
+		margin-right: 15%;
+	}
+}
+
 @media (max-width: 600px) {
 	.shortenSearch{
 		margin-top: 20% !important;
 		margin-left: -150px !important;
+	}
+
+	.orgBarSpace{
+		margin-left: -20px !important;
+		width: 275px;
+		float: none;
 	}
 }
