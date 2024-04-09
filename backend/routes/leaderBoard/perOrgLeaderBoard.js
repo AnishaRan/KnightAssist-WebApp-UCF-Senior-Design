@@ -7,23 +7,26 @@ router.get('/', async (req, res) => {
     try {
         const orgId = req.query.orgId;
 
+        // Check if the organization exists
         const organization = await Organization.findById(orgId);
         if (!organization) {
             return res.status(404).send('Organization not found in the database.');
         }
 
+        // Fetch students who have volunteer hours recorded for any organization
         const students = await UserStudent.find({ 'hoursPerOrg': { $exists: true } })
             .select('firstName lastName hoursPerOrg eventsHistory totalVolunteerHours');
 
-		console.log(students);
-
-        let volunteerDetails = students.filter(student => student.hoursPerOrg && student.hoursPerOrg.has(orgId))
+        // Filter students by those who have volunteered for the specific organization
+        let volunteerDetails = students.filter(student => student.hoursPerOrg && student.hoursPerOrg[orgId])
             .map(student => {
-                let orgData = student.hoursPerOrg.get(orgId) || { hours: 0, numEvents: 0 };
+                // Access the organization data directly from the object using orgId as the key
+                let orgData = student.hoursPerOrg[orgId] || { hours: 0, numEvents: 0 };
                 return {
                     _id: student._id,
                     firstName: student.firstName,
                     lastName: student.lastName,
+                    // Use the specific volunteer hours and number of events for this organization
                     totalVolunteerHours: orgData.hours,
                     numEvents: orgData.numEvents
                 };

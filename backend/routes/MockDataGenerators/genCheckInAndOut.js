@@ -40,16 +40,12 @@ router.post('/', async (req, res) => {
 
                 const orgId = event.sponsoringOrganization.toString();
 
-				let orgData;
+                let orgData = student.hoursPerOrg[orgId] || { hours: 0, numEvents: 0 };
 
-				if(student.hoursPerOrg.get(orgId) && typeof student.hoursPerOrg.get(orgId) === 'object')
-					orgData = student.hoursPerOrg.get(orgId);
-				else
-					orgData = { hours: 0, numEvents: 0 };
-
-                orgData.hours = (parseFloat(orgData.hours) + volunteeringHours).toFixed(2);
+                orgData.hours += volunteeringHours;
+                orgData.hours = parseFloat(orgData.hours.toFixed(2));
                 orgData.numEvents += 1;
-                student.hoursPerOrg.set(orgId, orgData);
+                student.hoursPerOrg[orgId] = orgData;
 
                 student.eventsHistory.push(event._id);
 
@@ -73,6 +69,8 @@ router.post('/', async (req, res) => {
                 );
             }
 
+            // Mark the hoursPerOrg field as modified for Mongoose
+            student.markModified('hoursPerOrg');
             await student.save();
         }
 
