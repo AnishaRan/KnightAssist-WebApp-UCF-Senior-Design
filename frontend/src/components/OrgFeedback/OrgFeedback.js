@@ -139,6 +139,7 @@ function OrgFeedback() {
 		<div className='spartan'>
 			<Header/>
 			<OrgTopBar title="Feedback"/>
+			{(searchFeedback) ?
 			<div className='moveEverything'>
 				<div className='moveFromLeft'>
 					<div className="announcementSection">
@@ -155,10 +156,12 @@ function OrgFeedback() {
 								initialAnnouncements={feedback}
 							/>
 						</div>
-					{(searchFeedback) ? <Feedbacks feedback={searchFeedback} markRead={markRead} setMarkRead={setMarkRead} readChange={readChange} setReadChange={setReadChange}/> : <div className='centerProgress'><CircularProgress/></div>}
+					 <Feedbacks feedback={searchFeedback} markRead={markRead} setMarkRead={setMarkRead} readChange={readChange} setReadChange={setReadChange}/> 
 				</div>
 			</div>
 			</div>
+				: <div className='centerProgressFB'><CircularProgress/></div>
+			}
 		</div>
 	);
 }
