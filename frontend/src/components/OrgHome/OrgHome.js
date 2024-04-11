@@ -194,7 +194,7 @@ function OrgHome() {
 
 		<Dialog maxWidth={"xl"} sx={{marginLeft: 10}} open={openChartModal} onClose={() => closeChartModal()}>
 			<DialogContent className='spartan chartModal'>
-				<button className='chartClose'>
+				<button className={'chartClose ' + ((sessionStorage.getItem("theme") === "light")  ? "darkExit" : "lightExit")}>
 					<CloseIcon onClick={() => closeChartModal()}/>
 				</button>
 				{(fullChartData) ? 

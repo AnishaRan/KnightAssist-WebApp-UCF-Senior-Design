@@ -194,7 +194,7 @@ function Feedback() {
 		{(selectedFeedback) ? 
 			<Dialog open={modalOpen} onClose={handleCloseModal}>
 				<DialogContent className='feedbackModal'>
-					<button className='closeFeedback'>
+					<button className={'closeFeedback ' + ((sessionStorage.getItem("theme") === "light")  ? "darkExit" : "lightExit")}>
 						<CloseIcon onClick={handleCloseModal}/>
 					</button>
 					<DialogContentText color="textPrimary" style={{ marginBottom: 10}}>{formatDate(selectedFeedback.timeFeedbackSubmitted)}</DialogContentText>

@@ -20,6 +20,8 @@ function OrgProfile() {
 	const editInfo = useRef({});
 	const backgroundSelect = useRef(null);
 
+	const [resetPic, setResetPic] = useState(false);
+
 	async function getOrgInfo(){
         let organizationID;
 		
@@ -96,14 +98,14 @@ function OrgProfile() {
 	return (
 		<div className='spartan'>
 			{(sessionStorage.getItem("role") === "organization") ? <Header /> : <StudentHeader/>}
-			{(sessionStorage.getItem("role") === "organization") ? <OrgTopBar title="Profile"/> : <StudentTopBar title="Profile"/>}
+			{(sessionStorage.getItem("role") === "organization") ? <OrgTopBar title="Profile" resetPic={resetPic}/> : <StudentTopBar title="Profile"/>}
 			<div className='orgProfilePage spartan'>
 				{/* <div className='orgProfileTitle'>Organization Profile</div> */}
 				{(org !== null)
 					?	
 					<div>
 						<BackgroundBanner editMode={editMode}/>
-						<OrgBox org={org} editMode={editMode} setEditMode={setEditMode} editInfo={editInfo} reset={reset} setReset={setReset}/>
+						<OrgBox org={org} editMode={editMode} setEditMode={setEditMode} editInfo={editInfo} reset={reset} setReset={setReset} resetPic={resetPic} setResetPic={setResetPic}/>
 						<div className='navTabs'>
 							<NavTabs org={org} editMode={editMode} editInfo={editInfo}/>
 						</div>

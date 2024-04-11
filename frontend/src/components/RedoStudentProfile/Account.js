@@ -8,7 +8,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { TbEditCircle } from 'react-icons/tb';
 
 
-function Account({info, fetchStudentInfo})
+function Account({info, fetchStudentInfo, resetPic, setResetPic})
 {
     const [editMode, setEditMode] = useState(false);
     const [picName, setPicName] = useState([]);
@@ -118,6 +118,8 @@ function Account({info, fetchStudentInfo})
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.error('Error:', error));
+				
+				setResetPic(!resetPic);
             }
 
             // setReset(!props.reset);
@@ -162,7 +164,14 @@ function Account({info, fetchStudentInfo})
 	}
 
     async function getProfilePic(){
-		let id = sessionStorage.getItem("ID");
+		let id;
+
+		if("viewingStudentPageID" in sessionStorage && 
+			sessionStorage.getItem("ID") !== sessionStorage.getItem("viewingStudentPageID")){
+			id = sessionStorage.getItem("viewingStudentPageID");
+		}else{
+			id = sessionStorage.getItem("ID");
+		}
 
 		const url = buildPath(`api/retrieveImage?typeOfImage=3&id=${id}`);
 

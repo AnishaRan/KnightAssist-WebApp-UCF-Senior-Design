@@ -131,6 +131,8 @@ function OrgBox(props) {
 				.then(response => response.json())
 				.then(data => console.log(data))
 				.catch(error => console.error('Error:', error));
+
+				props.setResetPic(!props.resetPic);
 			}
 
 			if(editInfo.background){

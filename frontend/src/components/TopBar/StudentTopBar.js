@@ -210,7 +210,11 @@ function StudentTopBar(props)
 	useEffect(() => {
 		getProfilePic();
 		getNotifications();
-	}, [])
+	}, []);
+
+	useEffect(() => {
+		getProfilePic();
+	}, [props.resetPic])
 
     return(
       <div className="StudentTopBar">

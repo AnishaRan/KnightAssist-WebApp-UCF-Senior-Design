@@ -72,6 +72,10 @@ function OrgTopBar(props)
 		getProfilePic();
 	}, [])
 
+	useEffect(() => {
+		getProfilePic();
+	}, [props.resetPic])
+
    return(
       <div className="StudentTopBar">
     	<AppBar variant='outlined' className={(sessionStorage.getItem("theme") === 'light') ? 'whiteBar' : ''} position="static">

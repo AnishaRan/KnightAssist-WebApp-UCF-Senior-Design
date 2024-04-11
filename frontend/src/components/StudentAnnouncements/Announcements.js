@@ -167,7 +167,7 @@ const Announcements = (props) => {
 
       	<Dialog open={isModalOpen} onClose={handleCloseModal}>
 			<DialogContent className='feedbackModal'>
-				<button className='closeFeedback'>
+				<button className={'closeFeedback ' + ((sessionStorage.getItem("theme") === "light")  ? "darkExit" : "lightExit")}>
 					<CloseIcon onClick={handleCloseModal}/>
 				</button>
 				<DialogContentText color="textPrimary" className='contentWrap' style={{ fontSize: 25, marginBottom: 10}}>{selectedAnnouncement?.title}</DialogContentText>

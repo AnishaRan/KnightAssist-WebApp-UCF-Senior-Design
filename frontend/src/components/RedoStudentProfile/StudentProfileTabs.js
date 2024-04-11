@@ -51,7 +51,7 @@ function StudentProfileTabs(props) {
 
     useEffect(() => {
         fetchStudentInfo();
-      }, []);
+    }, []);
 
     return (
         <TabContext value={value}>
@@ -64,7 +64,7 @@ function StudentProfileTabs(props) {
                     </TabList>
                 </Box>
                 <div style={{ flex: 1 }}>
-                    <TabPanel value="1"><Account info={studentInfo} fetchStudentInfo={fetchStudentInfo} /></TabPanel>
+                    <TabPanel value="1"><Account info={studentInfo} fetchStudentInfo={fetchStudentInfo} resetPic={props.resetPic} setResetPic={props.setResetPic} /></TabPanel>
                     {/* <TabPanel value="2"><RecentEvents /></TabPanel> */}
                     <TabPanel value="3"><FavoritedOrganizations/></TabPanel>
                 </div>
