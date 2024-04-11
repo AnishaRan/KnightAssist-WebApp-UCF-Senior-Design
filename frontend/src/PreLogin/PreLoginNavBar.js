@@ -11,10 +11,13 @@ import MenuItem from '@mui/material/MenuItem';
 import { useMediaQuery } from '@mui/material';
 import KA_Logo from './../KA_Logo.png';
 import './PreLoginNavBarButton.css';
+import { Link, useLocation } from 'react-router-dom';
 
 const pages = ['Home', 'About', 'Contact'];
 
 function PreLoginNavBar() {
+  const location = useLocation();
+  
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -53,7 +56,11 @@ function PreLoginNavBar() {
   };
 
   const handleClick = (num) => {
-    window.location.href = '#/login';
+    if(num==1){
+      window.location.href = '#/register';
+    } else if (num==2){
+      window.location.href = '#/login';
+    }
   };
 
   const isMediumScreen = useMediaQuery((theme) => theme.breakpoints.down('md'));
@@ -152,7 +159,12 @@ function PreLoginNavBar() {
                 ))}
               </Box>
               </nav>
-              <Button variant="contained" sx={{ marginLeft: '30px', bgcolor: '#593959', ":hover": {bgcolor: '#322032'}}} onClick={() => handleClick(2)}>Login</Button>
+
+              {location.pathname === '/login' ? (
+                <Button variant="contained" sx={{ marginLeft: '30px', bgcolor: '#593959', ":hover": {bgcolor: '#322032'}}} onClick={() => handleClick(2)}>Sign Up</Button>
+              ) : (
+                <Button variant="contained" sx={{ marginLeft: '30px', bgcolor: '#593959', ":hover": {bgcolor: '#322032'}}} onClick={() => handleClick(2)}>Login</Button>
+              )}
               </>}
           </Box>
         </Toolbar>
