@@ -66,6 +66,14 @@
 	float: left;
 }
 
+.darkExit{
+	color: black;
+}
+
+.lightExit{
+	color: white;
+}
+
 @media (max-width: 1200px) {
 	.orgBarSpace{
 		margin-right: 15%;

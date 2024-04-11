@@ -42,10 +42,10 @@ function StudentExplore()
 				<Grid item>
 					<Search results={results} searchType={searchType} setEventID={setEventID} setOpenEvent={setOpenEvent} searchMode={searchMode} setSearchMode={setSearchMode} resetSearchCards={resetSearchCards} setResetSearchCards={setResetSearchCards} setAllOrgs={setAllOrgs} setAllOrgsFlag={setAllOrgsFlag}/>
 				</Grid>
-				<Grid item>
+				<Grid item marginTop={1}>
 					<button type="button" class="addEventBtn btn" disabled={(searchMode && !showSearch)} onClick={() => {setSearchMode(true); setResetSearchCards(resetSearchCards * -1)}}>Search</button>
 				</Grid>
-				<Grid item>
+				<Grid item marginTop={1}>
 					{(searchMode && searchType === "events") ? <button type="button" class="addEventBtn btn" onClick={() => setSearchMode(false)}>Exit Search</button> : ""}
 				</Grid>
 			</Grid>

@@ -108,7 +108,7 @@ function OrgAnn() {
 					initialAnnouncements={announcements}
 				/>
 			  </div>
-			  <Button variant="contained" sx={{marginTop: 1, color: 'white', backgroundColor: '#5B4E77'}} className="addEventBtn" onClick={() => setOpenAnnouncement(true)}>
+			  <Button variant="contained" sx={{marginTop: 1.5, color: 'white', backgroundColor: '#5B4E77'}} className="addEventBtn" onClick={() => setOpenAnnouncement(true)}>
 				Add Announcement
 			  </Button>
 			  <AddAnnouncementModal open={openAnnouncement} setOpen={setOpenAnnouncement} reset={reset} setReset={setReset}/>
