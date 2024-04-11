@@ -10,14 +10,15 @@ import OrgTopBar from '../OrgHome/OrgTopBar';
 
 function RedoStudentProfile()
 {
+	const [resetPic, setResetPic] = useState(false);
 
     return(
         <div className='fontFamily'>
             <div className='redoStudentProfile'>
 				{(sessionStorage.getItem("role") === "volunteer") ? <StudentHeader/> : <Header/>}
-				{(sessionStorage.getItem("role") === "volunteer") ? <StudentTopBar title="Profile"/> : <OrgTopBar title="Profile"/>}
+				{(sessionStorage.getItem("role") === "volunteer") ? <StudentTopBar title="Profile" resetPic={resetPic}/> : <OrgTopBar title="Profile"/>}
 				<div className="redoStudentProfileContent">
-					<StudentProfileTabs/>
+					<StudentProfileTabs setResetPic={setResetPic} resetPic={resetPic}/>
 				</div>
             </div>
         </div>
