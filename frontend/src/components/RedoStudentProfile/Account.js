@@ -162,7 +162,14 @@ function Account({info, fetchStudentInfo})
 	}
 
     async function getProfilePic(){
-		let id = sessionStorage.getItem("ID");
+		let id;
+
+		if("viewingStudentPageID" in sessionStorage && 
+			sessionStorage.getItem("ID") !== sessionStorage.getItem("viewingStudentPageID")){
+			id = sessionStorage.getItem("viewingStudentPageID");
+		}else{
+			id = sessionStorage.getItem("ID");
+		}
 
 		const url = buildPath(`api/retrieveImage?typeOfImage=3&id=${id}`);
 
