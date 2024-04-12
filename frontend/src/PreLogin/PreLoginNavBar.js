@@ -138,7 +138,13 @@ function PreLoginNavBar() {
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
-                <MenuItem><Button variant="contained" sx={{ bgcolor: '#593959', ":hover": {bgcolor: '#322032'}}} onClick={() => handleClick(2)}>Login</Button></MenuItem>
+                <MenuItem>
+                {location.pathname === '/login' ? (
+                  <Button variant="contained" sx={{ bgcolor: '#593959', ":hover": {bgcolor: '#322032'}}} onClick={() => handleClick(1)}>Sign Up</Button>
+                  ) : (
+                    <Button variant="contained" sx={{ bgcolor: '#593959', ":hover": {bgcolor: '#322032'}}} onClick={() => handleClick(2)}>Login</Button>
+                  )}
+              </MenuItem>
               </Menu>
             </Box>
             </nav>
