@@ -161,7 +161,7 @@ function PreLoginNavBar() {
               </nav>
 
               {location.pathname === '/login' ? (
-                <Button variant="contained" sx={{ marginLeft: '30px', bgcolor: '#593959', ":hover": {bgcolor: '#322032'}}} onClick={() => handleClick(2)}>Sign Up</Button>
+                <Button variant="contained" sx={{ marginLeft: '30px', bgcolor: '#593959', ":hover": {bgcolor: '#322032'}}} onClick={() => handleClick(1)}>Sign Up</Button>
               ) : (
                 <Button variant="contained" sx={{ marginLeft: '30px', bgcolor: '#593959', ":hover": {bgcolor: '#322032'}}} onClick={() => handleClick(2)}>Login</Button>
               )}
