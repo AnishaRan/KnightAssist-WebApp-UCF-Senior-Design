@@ -34,7 +34,7 @@ import MapContainer from '../MapContainer/MapContainer';
 
 function EventModal(props)
 {
-    const handleCloseModal = () => {props.setOpen(false); setMap(undefined)}
+    const handleCloseModal = () => {props.setOpen(false); props.setEventID(undefined);}
     const handleCloseAlert = () => {setOpenAlert(false);}
 	const handleCloseHours = () => {setOpenEditHours(false); setShowError(false)};
 
