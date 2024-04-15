@@ -25,7 +25,7 @@
 }
 
 .purpleCard{
-	background-color: #7062ad !important;
+	background-color: #847ab0 !important;
 	margin-bottom: 60px !important;
 }
 
@@ -96,6 +96,10 @@
 	margin-top: 25%;
 }
 
+.undoBtn{
+	margin-top: 8px;
+}
+
 @media (max-width: 1350px) {
     .removeIfShort {
         display: none !important;
@@ -116,6 +120,11 @@
 }
 
 @media (max-width: 740px) {
+	.studentSearch{
+		position: relative;
+		right: 25%;
+	}
+
     .rankCard{
 		height: 80px;
 	}
