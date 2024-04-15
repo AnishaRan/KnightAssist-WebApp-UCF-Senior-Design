@@ -96,7 +96,7 @@ export default function OrganizationForm(props) {
 					onClick={() => props.setTermsAccepted(!props.termsAccepted)}
 				/>
 			</FormControl>
-			<div className='termsCheck'>Do you agree to the <a className="noSpacePP privatePolicy" onClick={() => setOpenPolicyModal(true)}>terms and conditions?</a></div>
+			<div className='termsCheck'>Do you agree to the <a className="noSpacePP privatePolicy" onClick={() => setOpenPolicyModal(true)}>terms and conditions?</a> *</div>
 		  </Grid>
 
 		  <Dialog open={openPolicyModal} onClose={() => setOpenPolicyModal(false)}>
