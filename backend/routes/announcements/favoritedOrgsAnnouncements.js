@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
         const announcements = [];
         for (let i = 0; i < favoritedOrgs.length; i++) {
             const org = await orgDB.findOne({ _id: favoritedOrgs[i] });
-            if (!org) return res.status(404).send('Organization not found in the database');
+            if (!org) continue;
             const updates = org.updates;
             for (let j = 0; j < updates.length; j++) {
                 announcements.push({
