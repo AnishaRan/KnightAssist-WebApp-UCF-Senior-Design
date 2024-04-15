@@ -81,7 +81,7 @@ function Search(props) {
         const tmp = [];
 
         for(let org of res){
-            if("name" in org){
+            if("name" in org && org.firstTimeLogin == false){
               tmp.push({label: org.name, id: org._id})
             }
         }
