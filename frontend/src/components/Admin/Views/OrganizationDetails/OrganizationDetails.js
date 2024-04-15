@@ -120,9 +120,8 @@ function OrganizationDetails({ organizationID }) {
         console.log(background.url);
     
         setBGFile(background.url);
-        console.log(background);
         // pfp
-        url = buildPath(`api/retrieveImage?entityType=organization&id=${organizationID}&profilePicOrBackGround=4`);
+        url = buildPath(`api/retrieveImage?typeOfImage=2&id=${organizationID}`);
   
         try {
           response = await fetch(url, {
@@ -132,11 +131,8 @@ function OrganizationDetails({ organizationID }) {
   
       
           let pfp = JSON.parse(await response.text());
-          console.log(pfp);
-          console.log(pfp.url);
-      
           setPFPFile(pfp.url);
-          console.log(pfp);
+          console.log(pfp.url);
         } catch(e) {
           console.log("failed to get banner");
         }
