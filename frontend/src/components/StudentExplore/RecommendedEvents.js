@@ -165,7 +165,7 @@ function RecommendedEvents(props)
                             </div>
                             <div className="hoverText">
                                 <Typography>
-                                    {((props.description.length >= 140) ? (props.description.substring(0, 140) + "...") : props.description)}
+                                    {((props.description.length >= 120) ? (props.description.substring(0, 120) + "...") : props.description)}
                                 </Typography>
                             </div>
                         </CardContent>
