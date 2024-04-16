@@ -10,6 +10,7 @@ import PreLoginNavBar from '../../PreLogin/PreLoginNavBar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useStyles from '../../PreLogin/PreLoginStyles';
+import Alert from '@mui/material/Alert';
 
 const theme = createTheme();
 
@@ -17,6 +18,7 @@ function StudentEmailVerified() {
   const [verificationCode, setVerificationCode] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isSuccessful, setIsSuccessful] = useState(false);
 
   const classes = useStyles();
 
@@ -44,10 +46,13 @@ function StudentEmailVerified() {
       console.log(response);
       if(res.success) {
         setMessage("Correct code, please login");
+        setIsSuccessful(true);
       } else if(!res.success) {
         setMessage("*Incorrect verification code, please enter again");
+        setIsSuccessful(false);
       } else {
         setMessage("*Error occured");
+        setIsSuccessful(false);
       }
 
     } catch(e) {
@@ -73,7 +78,11 @@ return (
                 <Button className="submitBtn" variant="contained" color="primary" style={{ backgroundColor: '#5B4E77'}} onClick={submitVerifyCode}>
                   Submit
                 </Button>
-                <div style={{ color: message === "Correct code" ? "green" : "red", fontSize: '20px' }}>{message}</div>
+                {message && (
+                  <Alert severity={isSuccessful ? "success" : "error"} sx={{marginBottom: '10px'}}>
+                    {message}
+                  </Alert>
+                )}
               </Card>
             </div>
           </ThemeProvider>

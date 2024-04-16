@@ -168,7 +168,7 @@ function OrgFavoriteEvents(props)
                             </div>
                             <div className='hoverText'>
                                 <Typography>
-                                    {((props.description.length >= 180) ? (props.description.substring(0, 180) + "...") : props.description)}
+                                    {((props.description.length >= 120) ? (props.description.substring(0, 120) + "...") : props.description)}
                                 </Typography>
                             </div>
                         </CardContent>

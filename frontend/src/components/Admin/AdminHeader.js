@@ -60,7 +60,7 @@ function AdminHeader()
     };
 
     return(
-     <div>
+     <div className='fontFamily'>
         <div className={`sidebar ${isSidebarActive ? 'active' : ''}`}>
             <div className={`${isSidebarActive ? '' : 'moveLogoContent'} logo_content`}>
                 <div className="logo logoBtn">
