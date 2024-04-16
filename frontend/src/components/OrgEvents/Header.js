@@ -135,17 +135,17 @@ function Header()
                 </li>
 				<li>
                     <LightTooltip title={!isSidebarActive ? "Feedback" : ""} placement="right" className="custom-tooltip">
-                        <a href="#/orgfeedback">
-                            <RiStarLine className='searchIcon'></RiStarLine>
-                            <span class="links_name">Feedback {(numUnreads > 0) ? <div className='notoCircle'>{numUnreads}</div>: ""}</span>
+                        <a href="#/organnouncements">
+                            <RiFeedbackLine className='searchIcon'></RiFeedbackLine>
+                            <span class="links_name">Updates</span>
                         </a>
                     </LightTooltip>
                 </li>
 				<li>
                     <LightTooltip title={!isSidebarActive ? "Feedback" : ""} placement="right" className="custom-tooltip">
-                        <a href="#/organnouncements">
-                            <RiFeedbackLine className='searchIcon'></RiFeedbackLine>
-                            <span class="links_name">Updates</span>
+                        <a href="#/orgfeedback">
+                            <RiStarLine className='searchIcon'></RiStarLine>
+                            <span class="links_name">Feedback {(numUnreads > 0) ? <div className='notoCircle'>{numUnreads}</div>: ""}</span>
                         </a>
                     </LightTooltip>
                 </li>
