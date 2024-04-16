@@ -58,7 +58,7 @@ router.get('/', async (req, res) => {
     try {
         // TO USE DUMMY DATA COMMENT THIS SECTION OUT AND UNCOMMENT THE DUMMY DATA ONE
         /* UNCOMMENT THIS TO USE ACTUAL DATABASE DATA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-        /*const { orgId, limit } = req.query;
+        const { orgId, limit } = req.query;
 
         const organization = await Organization.findById(orgId);
 
@@ -76,8 +76,12 @@ router.get('/', async (req, res) => {
         //events = events.concat(events);
         //events = events.concat(events);
 
+		events.sort(function(a,b){ 
+			return b.endTime.toISOString().localeCompare(a.endTime.toISOString())
+		});
+
         if (limit)
-            events = events.splice(0, 10);
+            events = events.splice(0, 6);
 
         if (!events) {
             return res.status(404).send('No events found for this organization');
@@ -88,7 +92,7 @@ router.get('/', async (req, res) => {
         //     @rsvpCountData: RSVP count
         //     @checkedInCountData: checked-in count
         // */
-        /*const labels = [];
+        const labels = [];
         const rsvpCountData = [];
         const checkedInCountData = [];
 
@@ -97,14 +101,14 @@ router.get('/', async (req, res) => {
             labels.push(event.name);
             rsvpCountData.push(event.registeredVolunteers.length);
             checkedInCountData.push(event.checkedInStudents.length);
-        }*/
+        }
 
         /* DUMMY DATA !!!!!!!!!!!!!!!!!!!!!*/
-        const orgEvents = mockEvents.filter(event => event.sponsoringOrganization === 'someOrgId1');
+        /*const orgEvents = mockEvents.filter(event => event.sponsoringOrganization === 'someOrgId1');
 
         const labels = orgEvents.map(event => event.name);
         const rsvpCountData = orgEvents.map(event => event.registeredVolunteers.length);
-        const checkedInCountData = orgEvents.map(event => event.checkedInStudents.length);
+        const checkedInCountData = orgEvents.map(event => event.checkedInStudents.length);*/
         /* DUMMY DATA */
 
         // we get the no show data 
