@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
             events.startTime = (req.body.startTime) ? req.body.startTime : events.startTime;
             events.endTime = (req.body.endTime) ? req.body.endTime : events.endTime;
             events.eventLinks = (req.body.eventLinks) ? req.body.eventLinks : events.eventLinks;
-            events.eventTags = (req.body.eventLinks) ? req.body.eventLinks : events.eventTags;
+            events.eventTags = (req.body.eventTags) ? req.body.eventTags : events.eventTags;
             events.semester = (req.body.semester) ? req.body.semester : events.semester;
             events.maxAttendees = (req.body.maxAttendees) ? req.body.maxAttendees : events.maxAttendees;
             events.save();            
