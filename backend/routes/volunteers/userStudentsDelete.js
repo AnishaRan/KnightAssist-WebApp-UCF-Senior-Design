@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 });
 
 // delete user by email
-router.delete('/', authenticateToken_User, async (req, res) => {
+router.delete('/', async (req, res) => {
     const query = {
         $or: [
             { _id: req.body.id },
