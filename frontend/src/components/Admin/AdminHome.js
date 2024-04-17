@@ -140,13 +140,13 @@ function AdminHome()
               {selectedToggle === 'student' && (
                 <>
                   <div className='total'>Total Students: {numStudents}</div>
-                  <StudentTable students={students} />
+                  <StudentTable students={students} getAllStudents={getAllStudents} />
                 </>
               )}
               {selectedToggle === 'organization' && (
                 <>
                   <div className='total'>Total Organizations: {numOrgs}</div>
-                  <OrganizationTable orgs={orgs} />
+                  <OrganizationTable orgs={orgs} getAllOrgs={getAllOrgs} />
                 </>
               )}
             </div>

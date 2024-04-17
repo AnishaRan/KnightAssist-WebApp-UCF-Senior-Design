@@ -11,12 +11,39 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import '../AdminHome.css';
 import { useNavigate } from 'react-router';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { buildPath } from '../../../path.js';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function OrgTable(props) {
   const navigate = useNavigate();
 
   const [orderBy, setOrderBy] = useState('createdAt');
   const [order, setOrder] = useState('desc');
+  const [open, setOpen] = React.useState(false);
+  const [selectedOrgID, setSelectedOrgID] = React.useState(null);
+  const [message, setMessage] = useState('');
+  const [isSuccessful, setIsSuccessful] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+
+  const handleClickOpen = (organizationID) => {
+    setSelectedOrgID(organizationID);
+    setOpen(true);
+  };
+
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -28,6 +55,43 @@ function OrgTable(props) {
     console.log(`Clicked organization View for ID: ${organizationID}`);
     navigate(`/adminhome/organizations/${organizationID}`);
   };
+
+  const handleDeleteClick = (organizationID) => {
+    console.log(`Clicked organization View for ID: ${organizationID}`);
+    handleClickOpen(organizationID);
+  };
+
+  async function handleDeleteOrg() {
+    let orgID = selectedOrgID;
+
+    const json = 
+    {
+      id: orgID,
+    }
+    let url = buildPath(`api/organizationDelete`);
+    let response = await fetch(url, {
+      method: "DELETE",
+      body: JSON.stringify(json),
+      headers: {"Content-Type": "application/json"},
+    });
+
+    let res = await response.text();
+
+    console.log(res);
+    handleClose();
+
+    if (response.ok) {
+      props.getAllOrgs();
+      setMessage("Organization deleted successfully")
+      setIsSuccessful(true);
+    } else {
+      setMessage("Error occurred")
+      setIsSuccessful(false); 
+    }
+
+    setOpenAlert(true);
+
+  }
 
   const stableSort = (array, comparator) => {
     const stabilizedThis = array.map((el, index) => [el, index]);
@@ -109,9 +173,9 @@ function OrgTable(props) {
               </TableCell>
               <TableCell>
                 <TableSortLabel
-                  active={orderBy === 'followers'}
-                  direction={orderBy === 'followers' ? order : 'asc'}
-                  onClick={() => handleRequestSort('followers')}
+                  active={orderBy === 'favorites'}
+                  direction={orderBy === 'favorites' ? order : 'asc'}
+                  onClick={() => handleRequestSort('favorites')}
                 >
                   <strong>Followers</strong>
                 </TableSortLabel>
@@ -134,12 +198,14 @@ function OrgTable(props) {
             .map(
               (org) => (
                 <TableRow key={org._id}>
-                  <TableCell><Button size='small' variant='contained' disableElevation sx={{backgroundColor: '#5f5395', '&:hover': {
-                  backgroundColor: '#4f457c'}}} onClick={() => handleViewClick(org._id)}>View</Button></TableCell>
+                  <TableCell>
+                    <Button size='small' variant='contained' disableElevation sx={{backgroundColor: '#5f5395', '&:hover': {backgroundColor: '#4f457c'}}} onClick={() => handleViewClick(org._id)}>View</Button>
+                    <Button size='small' variant='contained' disableElevation sx={{marginLeft: '5px', backgroundColor: '#E71F51', '&:hover': {backgroundColor: '#CA214B'}}} onClick={() => handleDeleteClick(org._id)}>Delete</Button>
+                  </TableCell>
                   <TableCell>{org.name}</TableCell>
                   <TableCell>{org.email}</TableCell>
                   <TableCell>{org.createdAt}</TableCell>
-                  <TableCell>{org.followers?.length ?? 0}</TableCell>
+                  <TableCell>{org.favorites?.length ?? 0}</TableCell>
                   <TableCell>{org.events?.length ?? 0}</TableCell>
                 </TableRow>
               )
@@ -157,7 +223,43 @@ function OrgTable(props) {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Delete Account!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete this account?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleDeleteOrg} autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {message.length !== 0 && (
+            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} open={openAlert} autoHideDuration={3000} onClose={handleCloseAlert}>
+              {message.includes("Error") ? (
+                <Alert severity="error" onClose={handleCloseAlert}>
+                  {message}
+                </Alert>
+              ) : (
+                <Alert severity="success" onClose={handleCloseAlert}>
+                  {message}
+                </Alert>
+              )}
+            </Snackbar>
+        )}
     </div>
+    
   );
 }
 
