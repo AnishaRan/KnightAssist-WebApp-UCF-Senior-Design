@@ -10,19 +10,18 @@ router.post('/', async (req, res) => {
     await event.findOne({ sponsoringOrganization: searchID, _id: eventID }).then(async (events) => {
         console.log(events);
         if (events) {
-            events.name = req.body.name;
+            events.name = (req.body.name) ? req.body.name : events.name;
             // events.eventID = req.body.eventID;
-            events._id = req.body.eventID;
-            events.description = req.body.description;
-            events.location = req.body.location;
+            events.description = (req.body.description) ? req.body.description : events.description;
+            events.location = (req.body.location) ? req.body.location : events.location;
             // events.date = req.body.date; [REMOVED AFTER WE AGREED THAT DATE IS TO BE SPLIT INTO START AND END TIME ONLY]
-            events.sponsoringOrganization = req.body.organizationID;
-            events.startTime = req.body.startTime;
-            events.endTime = req.body.endTime;
-            events.eventLinks = req.body.eventLinks;
-            events.eventTags = req.body.eventTags;
-            events.semester = req.body.semester;
-            events.maxAttendees = req.body.maxAttendees;
+            events.sponsoringOrganization = (req.body.organizationID) ? req.body.organizationID : events.sponsoringOrganization; 
+            events.startTime = (req.body.startTime) ? req.body.startTime : events.startTime;
+            events.endTime = (req.body.endTime) ? req.body.endTime : events.endTime;
+            events.eventLinks = (req.body.eventLinks) ? req.body.eventLinks : events.eventLinks;
+            events.eventTags = (req.body.eventLinks) ? req.body.eventLinks : events.eventTags;
+            events.semester = (req.body.semester) ? req.body.semester : events.semester;
+            events.maxAttendees = (req.body.maxAttendees) ? req.body.maxAttendees : events.maxAttendees;
             events.save();            
             console.log(events);
 			res.status(200).json({message: "Successful", ID: events._id});
