@@ -1,2 +1,6 @@
-# KnightsAssist
-Repository For The WebApp Version of [KnightsAssist](https://knightassist-43ab3aeaada9.herokuapp.com/) (Senior Design Project 2023-2024)
+# KnightAssist
+Repository For The Web App Version of [KnightAssist](https://knightassist-43ab3aeaada9.herokuapp.com/) (Senior Design Project 2023-2024)
+
+Without any platform to support the unique needs of volunteers and organizations, KnightAssist addresses the various volunteering challenges faced by the UCF community by providing a web application and mobile companion for students, organizations, and admins to simplify volunteering processes. Unlike general platforms such as KnightConnect, KnightAssist stands out as UCF’s only volunteering-based platform by offering user-friendly features that empower students to find meaningful service opportunities aligned with their interests as well as equips organizations with tools to effectively manage their volunteers. 
+
+KnightAssist specifically alleviates issues faced by on-campus organizations such as the inability to keep track of check-in and check-out times, digitalize tedious paperwork, present insightful data analysis, and provide a free alternative to expensive 3rd party management platforms. By resolving these problems, our application enables organizations to redirect more time and resources towards helping the community instead of dealing with administrative challenges. Key features include mobile QR code integration to quickly verify attendance, a fair recommendation system, and 3 distinct interfaces tailored to the needs of students, organizations, and admins to create the ultimate volunteering platform service.
